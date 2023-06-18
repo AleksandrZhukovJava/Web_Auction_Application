@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - include:
+       file: liquibase/changesets/create_tables/15062023_create_table_lot.xml
+  - include:
+       file: liquibase/changesets/create_tables/15062023_create_table_bid.xml
+
