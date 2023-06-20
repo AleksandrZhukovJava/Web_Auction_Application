@@ -38,4 +38,12 @@ public class Lot {
     private Integer bidPrice;
     @OneToMany (cascade = CascadeType.REMOVE)
     private List<Bid> bids;
+
+    public Lot(Status status, String title, String description, Integer startPrice, Integer bidPrice) {
+        this.status = status;
+        this.title = title;
+        this.description = description;
+        this.startPrice = startPrice;
+        this.bidPrice = bidPrice;
+    }
 }

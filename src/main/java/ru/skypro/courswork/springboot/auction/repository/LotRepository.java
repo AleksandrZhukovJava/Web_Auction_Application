@@ -17,9 +17,9 @@ import java.util.Optional;
 
 public interface LotRepository extends CrudRepository<Lot, Integer>, PagingAndSortingRepository<Lot, Integer> {
 
-    @Query("select new ru.skypro.courswork.springboot.auction.model.view.FullLot (l.id, l.status,l.title,l.description,l.startPrice,l.bidPrice, COUNT(b.lot)) FROM Lot l " +
+    @Query("select new ru.skypro.courswork.springboot.auction.model.view.FullLot (l.id, l.status,l.title,l.description,l.startPrice,l.bidPrice, (COUNT(b.lot) * l.bidPrice + l.startPrice)) FROM Lot l " +
             "LEFT JOIN Bid b ON b.lot = l WHERE l.id = :id GROUP BY l.id, l.status,l.title,l.description,l.startPrice,l.bidPrice, b.lot")
-    Optional<FullLot> getFullLotByIdTEST(@Param("id") Integer id);
+    Optional<FullLot> getFullLotById(@Param("id") Integer id);
 
     @Transactional
     @Modifying

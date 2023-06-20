@@ -22,13 +22,19 @@ public class BidServiceImpl implements BidService{
     private LotRepository lotRepository;
     @Override
     public BidView getFirstBidById(Integer id) {
-       lotRepository.findById(id).orElseThrow(LotNotFound::new);
-        return bidRepository.getFirstBidById(id).orElse(null);
+        if (bidRepository.existsById(id)) {
+            return bidRepository.getFirstBidById(id).orElse(null);
+        } else {
+            throw new LotNotFound();
+        }
     }
     @Override
     public List<BidView> getNameWithBiggestAmountOfBid(@PathVariable("id") Integer id) {
-        lotRepository.findById(id).orElseThrow(LotNotFound::new); //Если бы был не лист был бы 1 запрос, но
-        return bidRepository.getNameWithBiggestAmountOfBid(id);
+        if (bidRepository.existsById(id)) {
+            return bidRepository.getNameWithBiggestAmountOfBid(id);
+        } else {
+            throw new LotNotFound();
+        }
     }
     @Override
     public void createBid(BidName bid, Integer id) {
@@ -36,6 +42,6 @@ public class BidServiceImpl implements BidService{
         if (!lot.getStatus().equals(Status.STARTED)) {
             throw new WrongLotStatus();
         }
-        bidRepository.save(new Bid(null, bid.getName(), ZonedDateTime.now(), lot)); // не то что бы красиво
+        bidRepository.save(new Bid(null, bid.getName(), ZonedDateTime.now(), lot));
     }
 }

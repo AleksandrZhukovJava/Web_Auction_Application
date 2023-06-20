@@ -13,8 +13,8 @@ import ru.skypro.courswork.springboot.auction.model.view.BidName;
 import ru.skypro.courswork.springboot.auction.model.view.BidView;
 import ru.skypro.courswork.springboot.auction.model.view.FullLot;
 import ru.skypro.courswork.springboot.auction.model.view.LotView;
-import ru.skypro.courswork.springboot.auction.service.bid.BidServiceImpl;
-import ru.skypro.courswork.springboot.auction.service.lot.LotServiceImpl;
+import ru.skypro.courswork.springboot.auction.service.bid.BidService;
+import ru.skypro.courswork.springboot.auction.service.lot.LotService;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,8 +23,8 @@ import java.util.List;
 @RequestMapping("/lot")
 @AllArgsConstructor
 public class LotController {
-    private final LotServiceImpl lotService;
-    private final BidServiceImpl bidService;
+    private final LotService lotService;
+    private final BidService bidService;
     @GetMapping("/{id}/first")
     @Tag(name = "Lot info")
     public BidView getFirstBidById(@PathVariable("id") Integer id) {

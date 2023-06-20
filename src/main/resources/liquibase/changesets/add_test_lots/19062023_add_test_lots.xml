@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <preConditions>
+        <runningAs username="postgres"/>
+    </preConditions>
+
+    <changeSet id="3" author="Alexandr Zhukov">
+        <insert tableName="lot">
+            <column name="title" value="Lot number one"/>
+            <column name="description" value="Test lot number one with biggest amount of bid"/>
+            <column name="start_price" value="100"/>
+            <column name="bid_price" value="100"/>
+        </insert>
+    </changeSet>
+    <changeSet id="4" author="Alexandr Zhukov">
+        <insert tableName="lot">
+            <column name="title" value="Lot number two"/>
+            <column name="description" value="Test lot number two"/>
+            <column name="start_price" value="200"/>
+            <column name="bid_price" value="200"/>
+        </insert>
+    </changeSet>
+    <changeSet id="5" author="Alexandr Zhukov">
+        <insert tableName="lot">
+            <column name="title" value="Lot number three"/>
+            <column name="description" value="Test lot number three with biggest start and bid price"/>
+            <column name="start_price" value="500"/>
+            <column name="bid_price" value="500"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
