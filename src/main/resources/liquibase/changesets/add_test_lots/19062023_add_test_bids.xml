@@ -19,7 +19,7 @@
     <changeSet id="7" author="Alexandr Zhukov">
         <insert tableName="bid">
             <column name="name" value="Test guy one"/>
-            <column name="time" value="2024-01-01 00:00:01.000000 +00:00"/>
+            <column name="time" value="2024-01-02 00:00:01.000000 +00:00"/>
             <column name="lot_id" value="1"/>
         </insert>
     </changeSet>

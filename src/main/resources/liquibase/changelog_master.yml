@@ -1,9 +1,0 @@
-databaseChangeLog:
-  - include:
-       file: liquibase/changesets/create_tables/15062023_create_table_lot.xml
-  - include:
-       file: liquibase/changesets/create_tables/15062023_create_table_bid.xml
-  - include:
-       file: liquibase/changesets/add_test_lots/19062023_add_test_lots.xml
-  - include:
-       file: liquibase/changesets/add_test_lots/19062023_add_test_bids.xml

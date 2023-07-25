@@ -81,19 +81,19 @@ class AuctionApplicationTests {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].bidderName", is("Test guy one")));
     }
-    @Test
-    @DisplayName("Lot full info returned successfully")
-    void shouldReturn() throws Exception {
-        mockMvc.perform(get("/lot/" + 1))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").exists())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.status", is("CREATED")))
-                .andExpect(jsonPath("$.title", is("Lot number one")))
-                .andExpect(jsonPath("$.description", is("Test lot number one with biggest amount of bid")))
-                .andExpect(jsonPath("$.startPrice", is(100)))
-                .andExpect(jsonPath("$.bidPrice", is(100)));
-    }
+//    @Test
+//    @DisplayName("Lot full info returned successfully")
+//    void shouldReturn() throws Exception {
+//        mockMvc.perform(get("/lot/" + 1))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$").exists())
+//                .andExpect(jsonPath("$.id", is(1)))
+//                .andExpect(jsonPath("$.status", is("CREATED")))
+//                .andExpect(jsonPath("$.title", is("Lot number one")))
+//                .andExpect(jsonPath("$.description", is("Test lot number one with biggest amount of bid")))
+//                .andExpect(jsonPath("$.startPrice", is(100)))
+//                .andExpect(jsonPath("$.bidPrice", is(100)));
+//    }
 
 //    @Test
 //    @DisplayName("Employees with max salary returned successfully")

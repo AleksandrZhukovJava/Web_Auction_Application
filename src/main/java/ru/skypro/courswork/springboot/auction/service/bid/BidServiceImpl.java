@@ -1,5 +1,10 @@
 package ru.skypro.courswork.springboot.auction.service.bid;
 
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +15,18 @@ import ru.skypro.courswork.springboot.auction.model.entity.Lot;
 import ru.skypro.courswork.springboot.auction.model.pojo.Status;
 import ru.skypro.courswork.springboot.auction.model.view.BidName;
 import ru.skypro.courswork.springboot.auction.model.view.BidView;
+import ru.skypro.courswork.springboot.auction.model.view.LotView;
 import ru.skypro.courswork.springboot.auction.repository.BidRepository;
 import ru.skypro.courswork.springboot.auction.repository.LotRepository;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Service
 public class BidServiceImpl implements BidService{
@@ -42,6 +54,6 @@ public class BidServiceImpl implements BidService{
         if (!lot.getStatus().equals(Status.STARTED)) {
             throw new WrongLotStatus();
         }
-        bidRepository.save(new Bid(null, bid.getName(), ZonedDateTime.now(), lot));
+        bidRepository.save(new Bid(bid.getName(), ZonedDateTime.now(), lot));
     }
 }

@@ -43,7 +43,6 @@ public class LotServiceImpl implements LotService {
         }
 
     }
-
     @Override
     public void stopBiddingForLot(Integer id) {
         if (bidRepository.existsById(id)) {
@@ -53,7 +52,6 @@ public class LotServiceImpl implements LotService {
         }
 
     }
-
     @Override
     public void createLot(LotView lotView) {
         lotRepository.save(new Lot(
@@ -63,7 +61,6 @@ public class LotServiceImpl implements LotService {
                 , lotView.getStartPrice()
                 , lotView.getBidPrice()));
     }
-
     @Override
     public List<LotDTO> getLotsByStatusAndPage(Status status, Integer page) {
         return lotRepository.findAllLotByStatus(status, PageRequest.of(page == null || page < 0 ? 0 : page, 10))
@@ -83,6 +80,7 @@ public class LotServiceImpl implements LotService {
             for (Object[] lotCSVView : lotRepository.getCSVLots()) {
                 csvPrinter.printRecord(lotCSVView);
             }
+
             csvPrinter.flush();
             return byteArrayOutputStream.toByteArray();
         }

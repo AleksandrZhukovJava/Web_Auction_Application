@@ -32,5 +32,4 @@ public interface LotRepository extends CrudRepository<Lot, Integer>, PagingAndSo
             "LEFT JOIN (SELECT b.id, b.name, b.time, b.lot_id  FROM bid b " +
             "INNER JOIN ( SELECT lot_id, MAX(time) AS max_time FROM bid GROUP BY lot_id) max ON b.lot_id = max.lot_id AND b.time = max.max_time) max_bid ON l.id = max_bid.lot_id;", nativeQuery = true)
     List<Object[]> getCSVLots();
-
 }
