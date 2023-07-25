@@ -24,4 +24,10 @@ public class Bid {
     @JoinColumn(name = "lot_id")
     @ManyToOne (cascade = CascadeType.DETACH)
     private Lot lot;
+
+    public Bid(String name, ZonedDateTime time, Lot lot) {
+        this.name = name;
+        this.time = time;
+        this.lot = lot;
+    }
 }

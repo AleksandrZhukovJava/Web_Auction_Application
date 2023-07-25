@@ -17,9 +17,9 @@ import java.util.Optional;
 
 public interface LotRepository extends CrudRepository<Lot, Integer>, PagingAndSortingRepository<Lot, Integer> {
 
-    @Query("select new ru.skypro.courswork.springboot.auction.model.view.FullLot (l.id, l.status,l.title,l.description,l.startPrice,l.bidPrice, COUNT(b.lot)) FROM Lot l " +
+    @Query("select new ru.skypro.courswork.springboot.auction.model.view.FullLot (l.id, l.status,l.title,l.description,l.startPrice,l.bidPrice, (COUNT(b.lot) * l.bidPrice + l.startPrice)) FROM Lot l " +
             "LEFT JOIN Bid b ON b.lot = l WHERE l.id = :id GROUP BY l.id, l.status,l.title,l.description,l.startPrice,l.bidPrice, b.lot")
-    Optional<FullLot> getFullLotByIdTEST(@Param("id") Integer id);
+    Optional<FullLot> getFullLotById(@Param("id") Integer id);
 
     @Transactional
     @Modifying
@@ -32,5 +32,4 @@ public interface LotRepository extends CrudRepository<Lot, Integer>, PagingAndSo
             "LEFT JOIN (SELECT b.id, b.name, b.time, b.lot_id  FROM bid b " +
             "INNER JOIN ( SELECT lot_id, MAX(time) AS max_time FROM bid GROUP BY lot_id) max ON b.lot_id = max.lot_id AND b.time = max.max_time) max_bid ON l.id = max_bid.lot_id;", nativeQuery = true)
     List<Object[]> getCSVLots();
-
 }

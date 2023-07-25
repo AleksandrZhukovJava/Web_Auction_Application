@@ -11,13 +11,11 @@ import java.util.Optional;
 
 public interface BidRepository extends CrudRepository<Bid,Integer> {
     @Query("SELECT new ru.skypro.courswork.springboot.auction.model.view.BidView (b.name , b.time) " +
-            "FROM Bid b WHERE b.lot.id = :id AND b.time = (SELECT min(b.time) FROM Bid b WHERE b.lot.id = :id)")
+            "FROM Bid b WHERE b.lot.id = :id ORDER BY b.time ASC LIMIT 1")
     Optional<BidView> getFirstBidById(@Param("id") Integer id);
     @Query("SELECT new ru.skypro.courswork.springboot.auction.model.view.BidView (b.name , b.time) " +
-            "FROM Bid b WHERE b.lot.id = :id AND b.time = (SELECT max(b.time) FROM Bid b WHERE b.lot.id = :id)")
+            "FROM Bid b WHERE b.lot.id = :id ORDER BY b.time DESC LIMIT 1")
     Optional<BidView> getLastBidById(@Param("id") Integer id);
-    @Query("SELECT new ru.skypro.courswork.springboot.auction.model.view.BidView (b.name , min(b.time))" +
-            " FROM Bid b WHERE b.lot.id = :id GROUP BY b.name HAVING count(b.lot.id) = (SELECT count(b.lot.id) AS cou" +
-            " FROM Bid b WHERE b.lot.id = :id GROUP BY b.name ORDER BY cou DESC LIMIT 1)")
+    @Query("SELECT new ru.skypro.courswork.springboot.auction.model.view.BidView (b.name,min(b.time)) FROM Bid b WHERE b.lot.id = :id GROUP BY b.name ORDER BY count(b) DESC LIMIT 1")
     List<BidView> getNameWithBiggestAmountOfBid(@Param("id") Integer id);
 }

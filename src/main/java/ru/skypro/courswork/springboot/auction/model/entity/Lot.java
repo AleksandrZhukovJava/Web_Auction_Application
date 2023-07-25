@@ -2,11 +2,14 @@ package ru.skypro.courswork.springboot.auction.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ru.skypro.courswork.springboot.auction.model.pojo.Status;
 
 import java.util.List;
@@ -25,7 +28,7 @@ public class Lot {
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column (name = "title")
-    @Size (min = 3, message = "Min length 3")
+    @Size (min = 1, message = "Min length 1")
     private String title;
     @Column (name = "description")
     @Size (min = 1, message = "Min length 1")
@@ -38,4 +41,12 @@ public class Lot {
     private Integer bidPrice;
     @OneToMany (cascade = CascadeType.REMOVE)
     private List<Bid> bids;
+
+    public Lot(Status status, String title, String description, Integer startPrice, Integer bidPrice) {
+        this.status = status;
+        this.title = title;
+        this.description = description;
+        this.startPrice = startPrice;
+        this.bidPrice = bidPrice;
+    }
 }

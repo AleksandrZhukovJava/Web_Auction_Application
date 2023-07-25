@@ -18,10 +18,10 @@ public class FullLot {
     private String description;
     private Integer startPrice;
     private Integer bidPrice;
-    private Long currentPrice;
+    private Integer currentPrice;
     private BidView lastBid;
 
-    public FullLot(Integer id, Status status, String title, String description, Integer startPrice, Integer bidPrice, Long currentPrice) {
+    public FullLot(Integer id, Status status, String title, String description, Integer startPrice, Integer bidPrice, Integer currentPrice) {
         this.id = id;
         this.status = status;
         this.title = title;

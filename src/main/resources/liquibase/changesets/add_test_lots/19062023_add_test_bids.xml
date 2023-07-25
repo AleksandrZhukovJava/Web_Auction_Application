@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <preConditions>
+        <runningAs username="postgres"/>
+    </preConditions>
+
+    <changeSet id="6" author="Alexandr Zhukov">
+        <insert tableName="bid">
+            <column name="name" value="Test guy one"/>
+            <column name="time" value="2024-01-01 00:00:00.000000 +00:00"/>
+            <column name="lot_id" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="7" author="Alexandr Zhukov">
+        <insert tableName="bid">
+            <column name="name" value="Test guy one"/>
+            <column name="time" value="2024-01-02 00:00:01.000000 +00:00"/>
+            <column name="lot_id" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="8" author="Alexandr Zhukov">
+        <insert tableName="bid">
+            <column name="name" value="Test guy with latest bid"/>
+            <column name="time" value="2025-01-01 00:00:00.000000 +00:00"/>
+            <column name="lot_id" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="9" author="Alexandr Zhukov">
+        <insert tableName="bid">
+            <column name="name" value="Test guy one"/>
+            <column name="time" value="2024-01-01 00:00:00.000000 +00:00"/>
+            <column name="lot_id" value="2"/>
+        </insert>
+    </changeSet>
+    <changeSet id="10" author="Alexandr Zhukov">
+        <insert tableName="bid">
+            <column name="name" value="Test guy two"/>
+            <column name="time" value="2024-01-02 00:00:01.000000 +00:00"/>
+            <column name="lot_id" value="2"/>
+        </insert>
+    </changeSet>
+    <changeSet id="11" author="Alexandr Zhukov">
+        <insert tableName="bid">
+            <column name="name" value="Test guy one"/>
+            <column name="time" value="2025-01-01 00:00:00.000000 +00:00"/>
+            <column name="lot_id" value="3"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

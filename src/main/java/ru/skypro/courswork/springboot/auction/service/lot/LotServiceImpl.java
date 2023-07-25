@@ -29,30 +29,37 @@ public class LotServiceImpl implements LotService {
 
     @Override
     public FullLot getFullLot(Integer id) {
-        FullLot fullLot = lotRepository.getFullLotByIdTEST(id).orElseThrow(LotNotFound::new);
+        FullLot fullLot = lotRepository.getFullLotById(id).orElseThrow(LotNotFound::new);
         fullLot.setLastBid(bidRepository.getLastBidById(id).orElse(null));
         return fullLot;
     }
+
     @Override
     public void startBiddingForLot(Integer id) {
-        lotRepository.findById(id).orElseThrow(LotNotFound::new);
-        lotRepository.changeStatusOfLot(Status.STARTED, id);
+        if (bidRepository.existsById(id)) {
+            lotRepository.changeStatusOfLot(Status.STARTED, id);
+        } else {
+            throw new LotNotFound();
+        }
+
     }
     @Override
     public void stopBiddingForLot(Integer id) {
-        lotRepository.findById(id).orElseThrow(LotNotFound::new);
-        lotRepository.changeStatusOfLot(Status.STOPPED, id);
+        if (bidRepository.existsById(id)) {
+            lotRepository.changeStatusOfLot(Status.STOPPED, id);
+        } else {
+            throw new LotNotFound();
+        }
+
     }
     @Override
     public void createLot(LotView lotView) {
         lotRepository.save(new Lot(
-                null
-                , Status.CREATED
+                Status.CREATED
                 , lotView.getTitle()
                 , lotView.getDescription()
                 , lotView.getStartPrice()
-                , lotView.getBidPrice()
-                , null));
+                , lotView.getBidPrice()));
     }
     @Override
     public List<LotDTO> getLotsByStatusAndPage(Status status, Integer page) {
@@ -61,6 +68,7 @@ public class LotServiceImpl implements LotService {
                 .map(LotMapper::fromLot)
                 .toList();
     }
+
     @Override
     public byte[] getCSVLots() throws IOException {
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
@@ -72,6 +80,7 @@ public class LotServiceImpl implements LotService {
             for (Object[] lotCSVView : lotRepository.getCSVLots()) {
                 csvPrinter.printRecord(lotCSVView);
             }
+
             csvPrinter.flush();
             return byteArrayOutputStream.toByteArray();
         }
